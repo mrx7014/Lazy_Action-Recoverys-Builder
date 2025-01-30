@@ -3,6 +3,12 @@ name: TeamWin [TWRP]
 on:
   workflow_dispatch:
     inputs:
+      DEVICE_NAME:
+      required: true
+      default: ''
+      BUILD_DESCRIPTION:
+       required: true
+       default: 'Enter build description'
       MANIFEST_BRANCH:
         description: 'TWRP Manifest Branch'
         required: true
@@ -58,6 +64,16 @@ jobs:
     steps:
     - name: Check Out
       uses: actions/checkout@v4
+
+    - name: Send Start Notification
+      run: |
+          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
+            -d text="📦 Build started TWRP by ${{ github.actor }} for target: ${{ github.event.inputs.DEVICE_NAME }}. \
+            Description: ${{ github.event.inputs.BUILD_DESCRIPTION }} \
+            [View Actions]($ACTION_URL)" \
+            -d parse_mode="Markdown"
       
     - name: Display Inputs
       run: |
@@ -196,6 +212,28 @@ jobs:
           Build: ${{ inputs.MANIFEST_BRANCH }}
           Device: [Device Tree/Branch](${{ inputs.DEVICE_TREE }}/tree/${{ inputs.DEVICE_TREE_BRANCH }})
           Commit: Most recent [commit](${{ inputs.DEVICE_TREE }}/commit/${{ env.COMMIT_ID }}) during building.
+
+    - name: Send Success Notification
+      if: success()
+      run: |
+          RELEASE_LINK="https://github.com/${{ github.repository }}/releases"
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
+            -d text="✅ Build TWRP finished successfully for target: ${{ github.event.inputs.DEVICE_NAME }}. \
+            Description: ${{ github.event.inputs.BUILD_DESCRIPTION }} \
+            [Download TWRP](${RELEASE_LINK}) \
+            -d parse_mode="Markdown"
+
+    - name: Send Failure Notification
+      if: failure()
+      run: |
+          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
+            -d text="❌ Build TWRP failed for target: ${{ github.event.inputs.DEVICE_NAME }}. \
+            Description: ${{ github.event.inputs.BUILD_DESCRIPTION }} \
+            [View Actions]($ACTION_URL)" \
+            -d parse_mode="Markdown"
 
     - name: Run LDCheck
       if: inputs.LDCHECK == 'true'
