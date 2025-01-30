@@ -79,8 +79,7 @@ jobs:
            🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
            📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
            🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-           🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
-            [🔗 View Actions]($ACTION_URL)" \
+           🔗 **View Actions**: ($ACTION_URL)" \
             -d parse_mode="Markdown"
       
     - name: Display Inputs
@@ -231,9 +230,8 @@ jobs:
             📱 **Device:** ${{ inputs.DEVICE_NAME }}  
            🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
            📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
-           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-           🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
-           🔗 [Download TWRP](${RELEASE_LINK})" \
+           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})   
+           🔗 **Download TWRP:** (${RELEASE_LINK})" \
             -d parse_mode="Markdown"
 
     - name: Send Failure Notification
@@ -246,9 +244,8 @@ jobs:
            📱 **Device:** ${{ inputs.DEVICE_NAME }}  
           🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
-          🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-          🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
-          🔗 [View Actions]($ACTION_URL)" \
+          🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})    
+          🔗 **View Actions:** ($ACTION_URL)" \
             -d parse_mode="Markdown"
 
     - name: Run LDCheck
