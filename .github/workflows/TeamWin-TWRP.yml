@@ -6,9 +6,11 @@ on:
       DEVICE_NAME:
       required: true
       default: ''
+      type: string
       BUILD_DESCRIPTION:
        required: true
        default: 'Enter build description'
+       type: string
       MANIFEST_BRANCH:
         description: 'TWRP Manifest Branch'
         required: true
