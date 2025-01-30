@@ -75,8 +75,8 @@ jobs:
       - name: Send Start Notification
         run: |
           ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          curl -X POST https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage \
-            -d chat_id="<TELEGRAM_CHAT_ID>" \
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
             -d text="🚀 **Build Started for TWRP**  
             📱 **Device:** ${{ inputs.DEVICE_NAME }}  
            🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
@@ -168,8 +168,8 @@ jobs:
         if: success()
         run: |
           RELEASE_LINK="https://github.com/${{ github.repository }}/releases"
-          curl -X POST https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage \
-            -d chat_id="<TELEGRAM_CHAT_ID>" \
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
             -d text="🎉 **Build Finished Successfully**  
             📱 **Device:** ${{ inputs.DEVICE_NAME }}  
            🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
@@ -183,8 +183,8 @@ jobs:
         if: failure()
         run: |
           ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          curl -X POST https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage \
-            -d chat_id="<TELEGRAM_CHAT_ID>" \
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
             -d text="❌ **Build Failed**  
            📱 **Device:** ${{ inputs.DEVICE_NAME }}  
           🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
