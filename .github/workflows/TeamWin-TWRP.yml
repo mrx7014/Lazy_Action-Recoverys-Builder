@@ -70,20 +70,20 @@ jobs:
       contents: write
     steps:
       - name: Check Out
-        uses: actions/checkout@v4
-
+        uses: actions/checkout@v2
+        
       - name: Send Start Notification
         run: |
           ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           curl -X POST https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage \
             -d chat_id="<TELEGRAM_CHAT_ID>" \
             -d text="🚀 **Build Started for TWRP**  
-📱 **Device:** ${{ inputs.DEVICE_NAME }}  
-🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
-📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
-🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
-[🔗 View Actions]($ACTION_URL)" \
+            📱 **Device:** ${{ inputs.DEVICE_NAME }}  
+           🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
+           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
+           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
+           🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
+            [🔗 View Actions]($ACTION_URL)" \
             -d parse_mode="Markdown"
 
       - name: Display Inputs
@@ -171,12 +171,12 @@ jobs:
           curl -X POST https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage \
             -d chat_id="<TELEGRAM_CHAT_ID>" \
             -d text="🎉 **Build Finished Successfully**  
-📱 **Device:** ${{ inputs.DEVICE_NAME }}  
-🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
-📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
-🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
-🔗 [Download TWRP](${RELEASE_LINK})" \
+            📱 **Device:** ${{ inputs.DEVICE_NAME }}  
+           🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
+           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
+           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
+           🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
+           🔗 [Download TWRP](${RELEASE_LINK})" \
             -d parse_mode="Markdown"
 
       - name: Send Failure Notification
@@ -186,10 +186,10 @@ jobs:
           curl -X POST https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/sendMessage \
             -d chat_id="<TELEGRAM_CHAT_ID>" \
             -d text="❌ **Build Failed**  
-📱 **Device:** ${{ inputs.DEVICE_NAME }}  
-🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
-📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
-🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
-🔗 [View Actions]($ACTION_URL)" \
+           📱 **Device:** ${{ inputs.DEVICE_NAME }}  
+          🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
+          📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
+          🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
+          🛠️ **Build Target:** ${{ inputs.BUILD_TARGET }}  
+          🔗 [View Actions]($ACTION_URL)" \
             -d parse_mode="Markdown"
