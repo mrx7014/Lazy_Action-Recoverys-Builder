@@ -56,6 +56,19 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Send Start Notification
+      run: |
+          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
+            -d text="🚀 **Build Started for OrangeFox**
+            📱 **Device: Samsung A23 4G**
+           🔧 **Description: initial OFOX build for A23 4G**
+           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
+           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
+           🔗 **View Actions**: ($ACTION_URL)" \
+            -d parse_mode="Markdown"
+
     - name: Display Inputs
       run: |
         echo "Displaying variables/inputs."
@@ -192,6 +205,35 @@ jobs:
           Commit: Most recent [commit](${{ inputs.DEVICE_TREE }}/commit/${{ env.COMMIT_ID }}) during building.
           MD5 (img): ${{ env.MD5_IMG }}
           MD5 (zip): ${{ env.MD5_ZIP }}
+
+    - name: Send Success Notification
+      if: success()
+      run: |
+          RELEASE_LINK="https://github.com/${{ github.repository }}/releases"
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
+            -d text="🎉 **Build Finished Successfully**  
+            📱 **Device: Samsung A23 4G**
+           🔧 **Description: initial OFOX build for A23 4G**  
+           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
+           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})   
+           🔗 **Download TWRP:** (${RELEASE_LINK})" \
+            -d parse_mode="Markdown"
+
+    - name: Send Failure Notification
+      if: failure()
+      run: |
+          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
+            -d chat_id="-1001538361307" \
+            -d text="❌ **Build Failed**  
+           📱 **Device: Samsung A23 4G**
+           🔧 **Description: initial OFOX build for A23 4G**
+          📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
+          🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})    
+          🔗 **View Actions:** ($ACTION_URL)" \
+            -d parse_mode="Markdown"
+
           
     - name: Run LDCheck
       if: inputs.LDCHECK == 'true'
