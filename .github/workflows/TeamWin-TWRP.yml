@@ -79,7 +79,7 @@ jobs:
            🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
            📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
            🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-           🔗 **View Actions**: ($ACTION_URL)" \
+           🔗 **View Actions**: [Click Here]($ACTION_URL) \
             -d parse_mode="Markdown"
       
     - name: Display Inputs
@@ -245,7 +245,7 @@ jobs:
           🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})    
-          🔗 **View Actions:** ($ACTION_URL)" \
+          🔗 **View Actions**: [Click Here]($ACTION_URL) \
             -d parse_mode="Markdown"
 
     - name: Run LDCheck
