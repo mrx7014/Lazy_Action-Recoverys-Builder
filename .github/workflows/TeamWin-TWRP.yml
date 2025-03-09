@@ -3,16 +3,6 @@ name: TeamWin [TWRP]
 on:
   workflow_dispatch:
     inputs:
-      DEVICE_NAME:
-        description: 'Device Name'
-        required: true
-        default: ''
-        type: string
-      BUILD_DESCRIPTION:
-        description: 'Build Description'
-        required: true
-        default: 'Enter build description'
-        type: string
       MANIFEST_BRANCH:
         description: 'TWRP Manifest Branch'
         required: true
@@ -69,19 +59,6 @@ jobs:
     - name: Check Out
       uses: actions/checkout@v4
 
-    - name: Send Start Notification
-      run: |
-          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
-            -d chat_id="-1001869812799" \
-            -d text="🚀 **Build Started for TWRP**  
-            📱 **Device:** ${{ inputs.DEVICE_NAME }}  
-           🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
-           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
-           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-           🔗 **View Actions**: [Click Here]($ACTION_URL) \
-            -d parse_mode="Markdown"
-      
     - name: Display Inputs
       run: |
         echo "Displaying variables/inputs."
@@ -219,34 +196,6 @@ jobs:
           Build: ${{ inputs.MANIFEST_BRANCH }}
           Device: [Device Tree/Branch](${{ inputs.DEVICE_TREE }}/tree/${{ inputs.DEVICE_TREE_BRANCH }})
           Commit: Most recent [commit](${{ inputs.DEVICE_TREE }}/commit/${{ env.COMMIT_ID }}) during building.
-
-    - name: Send Success Notification
-      if: success()
-      run: |
-          RELEASE_LINK="https://github.com/${{ github.repository }}/releases"
-          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
-            -d chat_id="-1001869812799" \
-            -d text="🎉 **Build Finished Successfully**  
-            📱 **Device:** ${{ inputs.DEVICE_NAME }}  
-           🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
-           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
-           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})   
-           🔗 **Download TWRP:** (${RELEASE_LINK})" \
-            -d parse_mode="Markdown"
-
-    - name: Send Failure Notification
-      if: failure()
-      run: |
-          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          curl -X POST https://api.telegram.org/bot5477489617:AAHFxTxuvPGgGM_QmoWtIYBPouv-OnTHL64/sendMessage \
-            -d chat_id="-1001869812799" \
-            -d text="❌ **Build Failed**  
-           📱 **Device:** ${{ inputs.DEVICE_NAME }}  
-          🔧 **Description:** ${{ inputs.BUILD_DESCRIPTION }}  
-          📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
-          🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})    
-          🔗 **View Actions**: [Click Here]($ACTION_URL) \
-            -d parse_mode="Markdown"
 
     - name: Run LDCheck
       if: inputs.LDCHECK == 'true'
