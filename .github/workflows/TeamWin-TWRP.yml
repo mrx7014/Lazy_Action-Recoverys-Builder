@@ -66,11 +66,11 @@ jobs:
         curl -X POST https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage \
           -d chat_id="<YOUR_CHAT_ID>" \
           -d text="🚀 Build Started for TWRP
-Device: Samsung A23 4G
-Description: Remove OMR, Optics, and Prism images from twrp.flags (will not be available in advanced wipe menu)
-Manifest Branch: ${{ inputs.MANIFEST_BRANCH }}
-Device Tree: ${{ inputs.DEVICE_TREE }} (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})
-View Actions: $ACTION_URL"
+           Device: Samsung A23 4G
+           Description: Remove OMR, Optics, and Prism images from twrp.flags (will not be available in advanced wipe menu)
+           Manifest Branch: ${{ inputs.MANIFEST_BRANCH }}
+           Device Tree: ${{ inputs.DEVICE_TREE }} (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})
+           View Actions: $ACTION_URL"
 
     - name: Display Inputs
       run: |
@@ -201,11 +201,11 @@ View Actions: $ACTION_URL"
         curl -X POST https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage \
           -d chat_id="<YOUR_CHAT_ID>" \
           -d text="🎉 Build Finished Successfully
-Device: Samsung A23 4G
-Description: Remove OMR, Optics, and Prism images from twrp.flags (will not be available in advanced wipe menu)
-Manifest Branch: ${{ inputs.MANIFEST_BRANCH }}
-Device Tree: ${{ inputs.DEVICE_TREE }} (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})
-Download TWRP: $RELEASE_LINK"
+          Device: Samsung A23 4G
+          Description: Remove OMR, Optics, and Prism images from twrp.flags (will not be available in advanced wipe menu)
+          Manifest Branch: ${{ inputs.MANIFEST_BRANCH }}
+          Device Tree: ${{ inputs.DEVICE_TREE }} (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})
+          Download TWRP: $RELEASE_LINK"
 
     - name: Send Failure Notification
       if: failure()
@@ -214,11 +214,11 @@ Download TWRP: $RELEASE_LINK"
         curl -X POST https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage \
           -d chat_id="<YOUR_CHAT_ID>" \
           -d text="❌ Build Failed
-Device: Samsung A23 4G
-Description: Remove OMR, Optics, and Prism images from twrp.flags (will not be available in advanced wipe menu)
-Manifest Branch: ${{ inputs.MANIFEST_BRANCH }}
-Device Tree: ${{ inputs.DEVICE_TREE }} (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})
-View Actions: $ACTION_URL"
+           Device: Samsung A23 4G
+           Description: Remove OMR, Optics, and Prism images from twrp.flags (will not be available in advanced wipe menu)
+           Manifest Branch: ${{ inputs.MANIFEST_BRANCH }}
+           Device Tree: ${{ inputs.DEVICE_TREE }} (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})
+           View Actions: $ACTION_URL"
 
     - name: Run LDCheck
       if: inputs.LDCHECK == 'true'
