@@ -69,7 +69,7 @@ jobs:
            🔧 **Description: Remove OMR,Optics, and Prism images from twrp.flags (will not be available in advanced wipe menu)**
            📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
            🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})  
-           🔗 **View Actions**: ($ACTION_URL)" \
+           🔗 [View Actions]:(${ACTION_URL})" \
             -d parse_mode="Markdown"
             
     - name: Display Inputs
@@ -235,9 +235,8 @@ jobs:
            🔧 **Description: Remove OMR,Optics, and Prism images from twrp.flags (will not be available in advanced wipe menu)**
           📚 **Manifest Branch:** ${{ inputs.MANIFEST_BRANCH }}  
           🔗 **Device Tree:** [Device Tree](${{ inputs.DEVICE_TREE }}) (Branch: ${{ inputs.DEVICE_TREE_BRANCH }})    
-          🔗 **View Actions:** ($ACTION_URL)" \
-            -d parse_mode="Markdown"
-
+          🔗 [View Actions]:(${ACTION_URL})" 
+                 -d parse_mode="Markdown"
     - name: Run LDCheck
       if: inputs.LDCHECK == 'true'
       run: |
