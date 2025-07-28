@@ -1,4 +1,4 @@
-name: TeamWin [TWRP]
+name: SSH TeamWin [TWRP]
 
 on:
   workflow_dispatch:
