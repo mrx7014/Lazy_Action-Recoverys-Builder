@@ -96,12 +96,6 @@ jobs:
         cd android-recovery
         repo sync -j$(nproc --all) --force-sync
 
-    - name: Set up SSH
-      uses: fastai/workflows/ssh@master
-      with:
-         ssh_key: ${{ secrets.SSH_KEY }}
-         key_file: id_ecdsa
-         
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       timeout-minutes: 360
