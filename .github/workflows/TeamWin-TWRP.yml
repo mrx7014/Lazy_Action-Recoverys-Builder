@@ -9,6 +9,7 @@ on:
         default: ''
         type: choice
         options:
+        - twrp-14.1
         - twrp-12.1
         - twrp-11
         - twrp-10.0-deprecated
@@ -89,7 +90,7 @@ jobs:
 
     - name: Check Manifest Branch
       run: |
-        if [ ${{ inputs.MANIFEST_BRANCH }} == 'twrp-11' ] || [ ${{ inputs.MANIFEST_BRANCH }} == 'twrp-12.1' ]; then
+        if [ ${{ inputs.MANIFEST_BRANCH }} == 'twrp-11' ] || [ ${{ inputs.MANIFEST_BRANCH }} == 'twrp-12.1' ] || [ ${{ inputs.MANIFEST_BRANCH }} == 'twrp-14.1' ]; then
             echo "MANIFEST=https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git" >> $GITHUB_ENV
             echo "CHECK_LEGACY_BRANCH=false" >> $GITHUB_ENV
         else
