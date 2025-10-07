@@ -2,24 +2,6 @@ name: SSH TeamWin [TWRP]
 
 on:
   workflow_dispatch:
-    inputs:
-      MANIFEST_BRANCH:
-        description: 'TWRP Manifest Branch'
-        required: true
-        default: ''
-        type: choice
-        options:
-        - twrp-12.1
-        - twrp-11
-        - twrp-10.0-deprecated
-        - twrp-9.0
-        - twrp-8.1
-        - twrp-8.1-macOS
-        - twrp-7.1
-        - twrp-6.0
-        - twrp-5.1
-        - twrp-4.4-deprecated
-
 jobs:
   build:
     name: Build TWRP by ${{ github.actor }}
@@ -54,16 +36,6 @@ jobs:
       with:
         swap-size-gb: 12
 
-    - name: Check Manifest Branch
-      run: |
-        if [ ${{ inputs.MANIFEST_BRANCH }} == 'twrp-11' ] || [ ${{ inputs.MANIFEST_BRANCH }} == 'twrp-12.1' ]; then
-            echo "MANIFEST=https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git" >> $GITHUB_ENV
-            echo "CHECK_LEGACY_BRANCH=false" >> $GITHUB_ENV
-        else
-            echo "MANIFEST=https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git" >> $GITHUB_ENV
-            echo "CHECK_LEGACY_BRANCH=true" >> $GITHUB_ENV
-        fi
-
     - name: Prepare the environment
       run: |
         sudo apt update
@@ -89,13 +61,7 @@ jobs:
         cd android-recovery
         git config --global user.name "lazycodebuilder"
         git config --global user.email "154446636+lazycodebuilder@users.noreply.github.com"
-        repo init --depth=1 -u ${{ env.MANIFEST }} -b ${{ inputs.MANIFEST_BRANCH }}
-
-    - name: Repo Sync
-      run: |
-        cd android-recovery
-        repo sync -j$(nproc --all) --force-sync
-
+        
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       timeout-minutes: 360
